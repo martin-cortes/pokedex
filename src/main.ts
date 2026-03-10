@@ -18,6 +18,6 @@ async function bootstrap() {
     })
   );
 
-  await app.listen(process.env.PORT ?? +process.env.PORT!);
+  await app.listen(process.env.PORT ?? process.env.LOCAL_PORT!);
 }
 bootstrap();
