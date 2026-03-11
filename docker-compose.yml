@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pokedex-app
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT:-3000}
+      MONGO_CONNECTION: ${MONGO_CONNECTION}
+      DATABASE_NAME: ${DATABASE_NAME:-Pokedex}
+      DEFAULT_LIMIT: ${DEFAULT_LIMIT:-6}
+    ports:
+      - '${LOCAL_PORT:-3000}:3000'
+    restart: unless-stopped

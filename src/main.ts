@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = Number(process.env.PORT ?? process.env.LOCAL_PORT ?? 3000);
 
   app.setGlobalPrefix('api/v2');
 
@@ -13,11 +14,11 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       transformOptions: {
-        enableImplicitConversion: true
-      }
-    })
+        enableImplicitConversion: true,
+      },
+    }),
   );
 
-  await app.listen(process.env.PORT ?? process.env.LOCAL_PORT!);
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap();
