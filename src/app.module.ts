@@ -13,21 +13,23 @@ import { JoiValidationSchema } from './config/joi.validation';
   imports: [
     ConfigModule.forRoot({
       load: [EnvConfiguration],
-      validationSchema: JoiValidationSchema
+      validationSchema: JoiValidationSchema,
     }),
     ServeStaticModule.forRoot({
-    rootPath: join(__dirname,'..','public'),
-  }),
+      rootPath: join(__dirname, '..', 'public'),
+    }),
 
-    MongooseModule
-    .forRoot(process.env.MONGO_CONNECTION!, {
-      dbName: process.env.DATABASE_NAME
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION!, {
+      dbName: process.env.DATABASE_NAME,
     }),
     PokemonModule,
     CommonModule,
-    SeedModule
+    SeedModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
+
+// Note: SeedModule is imported but NOT auto-executed on startup
+// To seed data, call: GET /api/v2/seed/:quantity (e.g., /api/v2/seed/150)

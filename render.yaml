@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: pokedex
+    runtime: node
+    runtimeVersion: 22.22.0
+    plan: free
+
+    buildCommand: yarn install --frozen-lockfile && yarn build
+    startCommand: node --max-old-space-size=256 dist/main.js
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        scope: runtime
+
+    autoDeploy: true
+
+    # Health check to confirm service is running
+    healthCheckPath: /api/v2/pokemon
